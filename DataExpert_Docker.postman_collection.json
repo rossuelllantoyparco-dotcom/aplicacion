@@ -1,0 +1,48 @@
+{
+  "info": {
+    "name": "Bienestar API Docker",
+    "description": "Pruebas para la API de bienestar ejecutada en Docker.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Comprobar salud de la API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Analizar bienestar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sueno_horas\": 7,\n  \"actividad_minutos\": 30,\n  \"estres\": 4\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/wellness",
+          "host": ["{{base_url}}"],
+          "path": ["api", "wellness"]
+        }
+      }
+    }
+  ]
+}

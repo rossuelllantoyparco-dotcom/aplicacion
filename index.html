@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e8f7fb">
+  <title>Tu optimizador de bienestar</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">✦</div>
+      <div>
+        <p class="eyebrow">TU OPTIMIZADOR DE BIENESTAR</p>
+        <p class="subtitle">Pequeños hábitos, grandes cambios</p>
+      </div>
+      <button class="profile-button" id="profile-button" type="button" aria-label="Abrir perfil">ML</button>
+    </header>
+
+    <section class="hero-card" aria-labelledby="score-title">
+      <div class="hero-copy">
+        <p class="welcome-line">Hola, <strong id="user-name">María Luz</strong></p>
+        <p class="eyebrow accent">HOY, MIÉRCOLES 5 DE OCTUBRE</p>
+        <h1 id="score-title">Tu bienestar<br><span>en equilibrio</span></h1>
+        <p class="hero-text">Tu energía nace de lo que haces todos los días. Revisa tu progreso y elige un paso amable para hoy.</p>
+        <button class="primary-button" type="button" data-scroll-to="analysis">Analizar y mejorar <span aria-hidden="true">→</span></button>
+      </div>
+
+      <div class="score-panel" aria-live="polite">
+        <div class="score-ring" id="score-ring" style="--score: 260">
+          <div class="score-ring-inner">
+            <span class="score-value" id="score-value">260</span>
+            <span class="score-total">/ 300</span>
+            <span class="score-label">TU SCORE DE<br>BIENESTAR</span>
+          </div>
+        </div>
+        <div class="score-caption"><span class="status-dot"></span><span id="score-message">Vas muy bien, sigue así</span><small id="last-updated">Sin registro guardado</small></div>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="habits-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">TUS HÁBITOS DIARIOS</p>
+          <h2 id="habits-title">Lo que sostiene tu día</h2>
+        </div>
+        <span class="date-chip">HOY</span>
+      </div>
+      <div class="habit-grid">
+        <article class="habit-card sleep-card">
+          <div class="habit-icon" aria-hidden="true">◔</div>
+          <div><h3>Calidad de sueño</h3><p><strong id="sleep-score">90%</strong> recuperación</p></div>
+          <div class="mini-progress"><span id="sleep-progress" style="--value:90"></span></div>
+        </article>
+        <article class="habit-card activity-card">
+          <div class="habit-icon" aria-hidden="true">↗</div>
+          <div><h3>Actividad física</h3><p><strong id="activity-score">80%</strong> movimiento</p></div>
+          <div class="mini-progress"><span id="activity-progress" style="--value:80"></span></div>
+        </article>
+        <article class="habit-card mind-card">
+          <div class="habit-icon" aria-hidden="true">♧</div>
+          <div><h3>Equilibrio mental</h3><p><strong id="mind-score">70%</strong> calma</p></div>
+          <div class="mini-progress"><span id="mind-progress" style="--value:70"></span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <section class="analysis-card" id="analysis" aria-labelledby="analysis-title">
+        <div class="section-heading compact">
+          <div><p class="eyebrow">ANALIZA Y MEJORA</p><h2 id="analysis-title">Cuéntame cómo estás hoy</h2></div>
+          <span class="sparkle" aria-hidden="true">✦</span>
+        </div>
+        <div class="input-list">
+          <label class="range-row" for="sleep-input"><span><b>☾</b> Horas de sueño</span><output id="sleep-output">7.2 h</output><input id="sleep-input" type="range" min="0" max="12" step="0.1" value="7.2"></label>
+          <label class="range-row" for="activity-input"><span><b>↗</b> Actividad física</span><output id="activity-output">48 min</output><input id="activity-input" type="range" min="0" max="120" step="1" value="48"></label>
+          <label class="range-row" for="stress-input"><span><b>♡</b> Nivel de estrés</span><output id="stress-output">3 / 10</output><input id="stress-input" type="range" min="0" max="10" step="1" value="3"></label>
+        </div>
+        <button class="primary-button full" id="calculate-button" type="button">Actualizar mi bienestar <span aria-hidden="true">↗</span></button>
+        <p class="save-state" id="save-state" aria-live="polite">Los cambios se aplican al actualizar tu registro.</p>
+      </section>
+
+      <section class="agenda-card" aria-labelledby="agenda-title">
+        <div class="section-heading compact"><div><p class="eyebrow">TU AGENDA DE MEJORA</p><h2 id="agenda-title">Pasos para sentirte mejor</h2></div><span class="calendar-icon" aria-hidden="true">▦</span></div>
+        <ul class="recommendation-list" id="recommendation-list">
+          <li><span class="list-icon sleep">☾</span><span><b>Descanso</b><small>Regálate una noche tranquila</small></span></li>
+          <li><span class="list-icon activity">↗</span><span><b>Movimiento</b><small>20 min al aire libre</small></span></li>
+          <li><span class="list-icon mind">♡</span><span><b>Respiración</b><small>10 min de calma consciente</small></span></li>
+        </ul>
+      </section>
+    </section>
+
+    <section class="data-card" aria-labelledby="data-title">
+      <div class="section-heading compact">
+        <div><p class="eyebrow">REGISTRO COMPLETO</p><h2 id="data-title">Vista de datos del usuario</h2></div>
+        <button class="secondary-button" id="download-data" type="button"><span aria-hidden="true">⇩</span> Descargar CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table class="excel-table">
+          <thead><tr><th>Usuario</th><th>Sueño (h)</th><th>Actividad (min)</th><th>Estrés (0-10)</th><th>Score / 300</th><th>Estado</th><th>Última actualización</th></tr></thead>
+          <tbody id="data-table-body"></tbody>
+        </table>
+      </div>
+      <p class="table-note">Vista tipo Excel para revisar el registro actual. El score es orientativo y se actualiza con los datos del usuario.</p>
+    </section>
+
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <a class="active" href="#score-title"><span aria-hidden="true">⌂</span>Inicio</a>
+      <a href="#habits-title"><span aria-hidden="true">▥</span>Progreso</a>
+      <a href="#analysis"><span aria-hidden="true">⚙</span>Consejos</a>
+    </nav>
+
+    <dialog class="profile-dialog" id="profile-dialog" aria-labelledby="profile-title">
+      <form id="profile-form" method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">TU ESPACIO PERSONAL</p><h2 id="profile-title">Mi perfil</h2></div><button class="dialog-close" id="cancel-profile" type="button" aria-label="Cerrar">×</button></div>
+        <label for="profile-name">¿Cómo quieres que te llamemos?</label>
+        <input id="profile-name" name="name" maxlength="40" autocomplete="name" required>
+        <label for="profile-goal">Tu intención para este mes</label>
+        <select id="profile-goal" name="goal">
+          <option value="energy">Tener más energía</option>
+          <option value="sleep">Dormir mejor</option>
+          <option value="movement">Moverme más</option>
+          <option value="calm">Sentirme más en calma</option>
+        </select>
+        <button class="primary-button full" type="submit">Guardar perfil</button>
+      </form>
+    </dialog>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
